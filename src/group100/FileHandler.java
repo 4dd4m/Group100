@@ -20,22 +20,18 @@ public class FileHandler {
     private String fileName;
     private boolean exists;
 
-    //sets up the class variables and try to...
-    FileHandler(String fileName) throws IOException{
+    //sets up the class variables and try to read a file if exists
+    public FileHandler(String fileName) throws IOException{
         this.f = new File(fileName);
         this.fileName = fileName;
         this.exists = this.f.isFile();
-        
-        // ... create the file
-        if (this.exists == false) {
-            createFile(this.fileName);
-        }else{
-            loadFile();
+        if (this.exists == false) { // ... or create the file
+            createFile();
         }
     }
 
     //creates the file of not exists
-    private void createFile(String fileName) throws IOException{
+    private void createFile() throws IOException{
         if (this.exists == false) {
             f.createNewFile();
             System.out.println("Creating New file");
@@ -44,7 +40,7 @@ public class FileHandler {
     }
     
     //saves the file by iterating the given ArrayList<Student>
-    public void saveFile(ArrayList<Student> student) throws IOException{
+    public ArrayList<Student> saveFile(ArrayList<Student> student) throws IOException{
         //deleting the existing contents
         this.f.delete();
         this.f.createNewFile();
@@ -57,6 +53,8 @@ public class FileHandler {
             writer.write(studentLine.toString());       
         }
         writer.close();
+        
+        return student;
     }
     
     //loads a file
@@ -67,9 +65,11 @@ public class FileHandler {
         
         //iterating through the lines
         for (String line = in.readLine(); line != null; line = in.readLine()) {
-             String studentData[] = line.split(","); //explode it!
+            String studentData[] = line.split(","); //explode it!
+            if (line.length() > 0) {
              //make new students
-             studentFromFile.add(new Student(studentData[0], studentData[1], studentData[2]));
+             studentFromFile.add(new Student(studentData[0], studentData[1], studentData[2], studentData[3]));
+            }
         }
         in.close();
         return studentFromFile;
