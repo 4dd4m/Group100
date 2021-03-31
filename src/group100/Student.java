@@ -34,6 +34,7 @@ public class Student {
         this.dob = askQuestion("Student DOB: ");
         return validateStudent();   
     }
+    
     private String askQuestion(String question){
         String tmpInput = "";
         while(tmpInput.length() == 0){
@@ -73,9 +74,8 @@ public class Student {
         return "";
     }
     
-    public boolean searchStudent(String partOfName){
-        //Here we need to check if the supplied pattern is in the name or not
-        //if there is a match, return true
-        return true;
+    public int searchStudent(String partOfName){
+        //if there is a match, returns an index
+        return this.name.indexOf(partOfName);
     }
 }
