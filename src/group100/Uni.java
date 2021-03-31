@@ -36,9 +36,9 @@ public class Uni {
     }
     
     public void saveFile() throws IOException{ //saves the current students
-        //throws the class ArrayList<Student> to save
-        studentList = studentHandler.saveFile(studentList);
-        courseList = courseHandler.saveFile(courseList);
+        //throws the class ArrayList to save
+        studentHandler.saveFile(studentList);
+        courseHandler.saveFile(courseList);
     }
     public void displayMenu() throws IOException{//Displays a menu
         System.out.println("Application Started");

@@ -14,6 +14,7 @@ public class Student {
     
     //Standrad constructor. So we can do this: new Student('John Doe','Male','Jordanstown',01/01/1991')
     public Student(String name, String gender, String address, String dob){
+        //all variables are String, valiadates only on empty string
         this.name = name;
         this.gender = gender;
         this.address = address;
@@ -35,7 +36,7 @@ public class Student {
         return validateStudent();   
     }
     
-    private String askQuestion(String question){
+    private String askQuestion(String question){ //asks a question, with
         String tmpInput = "";
         while(tmpInput.length() == 0){
             System.out.print(question);

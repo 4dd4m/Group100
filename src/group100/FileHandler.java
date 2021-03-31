@@ -8,16 +8,16 @@ import java.util.ArrayList;
  * Handles the file reading 
  * Checks file existance
  * Create New files if needed
- * In paramters ArrayList<Student> (on save)
- * Return ArrayList<Student> (on load)
- * The students never stored in this class, just receive an ArrayList
- * and gives it back. Students are locating in the Uni.students
+ * In paramters ArrayList (on save)
+ * Return ArrayList (on load)
+ * Actual data never stored in this class, just receive an ArrayList
+ * and gives it back.
  */
 
 public class FileHandler {
     //Some class variables
-    private File f;
-    private String fileName;
+    private final File f;
+    private final String fileName;
     private boolean exists;
 
     //sets up the class variables and try to read a file if exists
@@ -34,27 +34,26 @@ public class FileHandler {
     private void createFile() throws IOException{
         if (this.exists == false) {
             f.createNewFile();
-            System.out.println("Creating New file");
+            System.out.println("Creating New file: " +this.fileName);
             this.exists = true;
         }
     }
     
-    //saves the file by iterating the given ArrayList<Student>
-    public ArrayList saveFile(ArrayList student) throws IOException{
-        //deleting the existing contents
+    //saves the file this.fileName by iterating the given ArrayList
+    public void saveFile(ArrayList fileData) throws IOException{
+        //deleting the existing contents and create a new file since
+        //all data come through the argument
         this.f.delete();
         this.f.createNewFile();
         
         //setting up the writer
         PrintWriter writer = new PrintWriter(new FileWriter(this.fileName));
         
-        //iterating the ArrayList<Student> and write them to a file
-        for (Object studentLine : student) {
-            writer.write(studentLine.toString());       
-        }
+        //iterating the ArrayList and write them to a file
+        fileData.forEach((line) -> {
+            writer.write(line.toString());
+        });
         writer.close();
-        
-        return student;
     }
     
     //loads a file
