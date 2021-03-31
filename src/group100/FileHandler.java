@@ -40,7 +40,7 @@ public class FileHandler {
     }
     
     //saves the file by iterating the given ArrayList<Student>
-    public ArrayList<Student> saveFile(ArrayList<Student> student) throws IOException{
+    public ArrayList saveFile(ArrayList student) throws IOException{
         //deleting the existing contents
         this.f.delete();
         this.f.createNewFile();
@@ -49,7 +49,7 @@ public class FileHandler {
         PrintWriter writer = new PrintWriter(new FileWriter(this.fileName));
         
         //iterating the ArrayList<Student> and write them to a file
-        for (Student studentLine : student) {
+        for (Object studentLine : student) {
             writer.write(studentLine.toString());       
         }
         writer.close();
@@ -58,20 +58,33 @@ public class FileHandler {
     }
     
     //loads a file
-    public ArrayList<Student> loadFile() throws FileNotFoundException, IOException{
+    public ArrayList loadFile(String type) throws FileNotFoundException, IOException{
         BufferedReader in = new BufferedReader(new FileReader(this.fileName));
         //Local List for students
-        ArrayList<Student> studentFromFile = new ArrayList<Student>();
+        ArrayList fileLines = new ArrayList();
         
-        //iterating through the lines
-        for (String line = in.readLine(); line != null; line = in.readLine()) {
-            String studentData[] = line.split(","); //explode it!
-            if (line.length() > 0) {
-             //make new students
-             studentFromFile.add(new Student(studentData[0], studentData[1], studentData[2], studentData[3]));
+        
+        if ("student".equals(type)) {
+            //iterating through the line
+            for (String line = in.readLine(); line != null; line = in.readLine()) {
+                String studentData[] = line.split(","); //explode it!
+                if (line.length() > 0) {
+                 //make new students
+                 fileLines.add(new Student(studentData[0], studentData[1], studentData[2], studentData[3]));
+                }
             }
-        }
+         }
+        if ("course".equals(type)) {
+            //iterating through the line
+            for (String line = in.readLine(); line != null; line = in.readLine()) {
+                String courseData[] = line.split(","); //explode it!
+                if (line.length() > 0) {
+                 //make new students
+                 fileLines.add(new Course(courseData[0], courseData[1]));
+                }
+            }
+         }
         in.close();
-        return studentFromFile;
+        return fileLines;
     }
 }

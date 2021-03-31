@@ -9,6 +9,7 @@ import java.util.*;
 
 public class Student {
     private String name,gender, address, dob;
+    protected boolean valid;
     Scanner Scan = new Scanner(System.in);
     
     //Standrad constructor. So we can do this: new Student('John Doe','Male','Jordanstown',01/01/1991')
@@ -26,56 +27,21 @@ public class Student {
         addStudent();
     }
     
-    private void addStudent(){//call the necessary methods, interactive mode
-        askName();
-        askGender();
-        askAddress();
-        askDob();
-        validateStudent();   
+    private boolean addStudent(){//call the necessary methods, interactive mode
+        this.name = askQuestion("Student name: ");
+        this.gender = askQuestion("Student gender: ");
+        this.address = askQuestion("Student Address: ");
+        this.dob = askQuestion("Student DOB: ");
+        return validateStudent();   
     }
-     
-    private void askName(){ //get the name from input
-        String tmpName = "";
-        while(tmpName.length() == 0){
-            System.out.print("Enter Student's Name: ");
-            tmpName = Scan.nextLine();
-            exitOnX(tmpName); //if user send x, exit
-            this.name = tmpName;
+    private String askQuestion(String question){
+        String tmpInput = "";
+        while(tmpInput.length() == 0){
+            System.out.print(question);
+            tmpInput = Scan.nextLine();
+            exitOnX(tmpInput); //if user send x, exit
         }
-    }
-    
-    private void askGender(){ //get the gender from input
-        String genderInput = "";
-        while(genderInput.length() == 0){
-            System.out.print("Enter Student's Gender: ");
-            genderInput = Scan.nextLine().toLowerCase();
-            exitOnX(genderInput);//if user send x, exit
-            if("male".equals(genderInput) || "1".equals(genderInput)){
-                this.gender = "male";
-            }else{
-                this.gender = "female";
-            }
-        }
-    }
-    
-    public void askAddress(){ //get the address from input
-        String tmpAddress = "";
-        while(tmpAddress.length() == 0){
-            System.out.print("Enter Student's Address: ");
-            tmpAddress = Scan.nextLine();
-            exitOnX(tmpAddress);//if user send x, exit
-            this.address = tmpAddress;
-        }
-    }
-    
-    private void askDob(){ //get the dob from input
-        String tmpDob = "";
-        while(tmpDob.length() == 0){
-            System.out.print("Enter Student's Birthdate: ");
-            tmpDob = Scan.nextLine();
-            exitOnX(tmpDob);//if user send x, exit
-            this.dob = tmpDob;           
-        }
+        return tmpInput;
     }
     
     private void exitOnX(String input){
@@ -88,20 +54,28 @@ public class Student {
     
     private boolean validateStudent(){ //true if it is a valid student (all field filled)
         if(this.name.length() > 0 && this.gender.length() > 0 && this.address.length() > 0 && this.dob.length() > 0){
+            this.valid = true;
             return true;
         }else{
             System.out.print("Student contains empty fields... No student added...");
+            this.valid = false;
             return false; //if this is not a valid student, return false
         }
     }
     
     @Override
     public String toString(){//represents a student (used while writing a txt file)
-        return ""+this.name+","+this.gender+","+this.address+","+this.dob;
+        return ""+this.name+","+this.gender+","+this.address+","+this.dob+"\n";
     }
     
     public String prettifyStudent(){ //displays a pretty versin of students
         System.out.print("Name:\t\t" +this.name+"\nGender:\t\t"+this.gender+"\nAddress:\t"+this.address+"\nDate:\t\t"+this.dob+"\n" );
         return "";
+    }
+    
+    public boolean searchStudent(String partOfName){
+        //Here we need to check if the supplied pattern is in the name or not
+        //if there is a match, return true
+        return true;
     }
 }

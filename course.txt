@@ -1,4 +1,0 @@
-Dumb,male,Under the Bridge,01/01/1919
-Dumber,male,Heaven St. 6,02/02/1912
-Even Dumber,male,Hellfire Avn.,03/03/1935
-This came from simply,load the file and,put concatenate this into it,and good
