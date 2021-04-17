@@ -27,35 +27,44 @@ public class Uni {
 
     public void displayMenu() throws IOException{//Displays a menu
         System.out.println("Application Started");
-        String menu = "1. Enrolled Students\n2. List of current Courses\n3. Add Student\n4. Add Course\n5. Search Student (nonW)\n6.Exit\n----------------------";
+        String menu = "1. Enrolled Students\n"
+                    + "2. List Courses Details\n"
+                    + "3. Add Student\n"
+                    + "4. Add Course\n"
+                    + "5. Search Student\n"
+                    + "6. Delete a Student\n"
+                    + "7.Exit\n"
+                    + "----------------------";
         
     while(true){ //inf loop
         System.out.println(menu);//display menu
         String choice = Scan.nextLine(); //ask user choice
             switch(choice){ //switch it
-                case "1": // list student
+                case "1":                                       // list student
                     course.displayEnrolledStudents();
                     break;
-                case "2": // list student
+                case "2":                                       // list student
                     course.prettifyCourse();
                     break;
-                case "3": // create a new student
+                case "3":                                // create a new student
                     Student tmpStudent = new Student();
                     if (tmpStudent.valid == true) {
                         course.enrollStudent(tmpStudent);
-           
                     }         
                     break;
-                case "4": // create a new student
+                case "4":                                 // create a new course
                      course = new Course();
                     if (course.valid == true) {
                         courseHandler.saveCourse(course);
                     }         
                     break;
-                case "5":
-                    //
+                case "5":                                     //search a student
+                    course.searchStudent();
                     break;
-                case "6":
+                case "6":                                    //Delete a student
+                    course.listStudentForDelete();
+                    break;
+                case "7":
                     System.out.println("Bye bye");
                     System.exit(0);
                 default:
@@ -66,7 +75,8 @@ public class Uni {
     }
 
     public static void main (String[] args) throws IOException{
-        Uni app = new Uni();
-        app.displayMenu();
+        //Program starts here
+        Uni app = new Uni();    // instantiation Uni class
+        app.displayMenu();      //throw the menu
     }
 }

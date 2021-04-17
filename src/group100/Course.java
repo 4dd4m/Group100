@@ -16,7 +16,8 @@ public class Course {
     final String studentFileName = "StudentDetails.txt";
     Scanner Scan = new Scanner(System.in);
     
-    //Standrad constructor. So we can do this: new Course('Drink Chiller','Lecturer Bill')
+    //Standrad constructor. So we can do this: 
+    //new Course('Drink Chiller','Lecturer Bill')
     public Course(String name, String lecturer) throws IOException{
         studentHandler = new FileHandler(studentFileName);
         this.name = name;
@@ -25,7 +26,8 @@ public class Course {
         loadStudents();
     }
     
-    //Constructor Overload, if no arguments were supplied, we step into 'interactive mode', so we can do this: new Srudent();
+    //Constructor Overload, if no arguments were supplied, 
+    //we step into 'interactive mode', so we can do this: new Srudent();
     public Course() throws IOException{
         System.out.print("Course Add. Interactive mode (press 'x' to exit)\n");
         addCourse();
@@ -58,25 +60,30 @@ public class Course {
         return students; //get all students who enrolled
     }
     
-    public void enrollStudent(Student student) throws IOException{ //enroll a student
-        if (totalStudents < MAXSTUDENTS) {      //can we store more?
-            students.add(student);              //add the student
-            totalStudents++;                    //increase the course counter
+    public void enrollStudent(Student student) throws IOException{ 
+    //enroll a student
+        if (totalStudents < MAXSTUDENTS) {              //can we store more?
+            students.add(student);                      //add the student
+            totalStudents++;                            //increase the courseCount
             if ("male".equals(student.getGender())) {
-                this.maleCounter++;             //register the gender
+                this.maleCounter++;                     //register the gender
             }else{
                 this.femaleCounter++;
             }
-            if (this.femaleCounter > 0 && this.maleCounter > 0) {
-                //avoid div0, cast to float, calulate the gender%
-                this.malePercent = 100 * (float) this.maleCounter / this.totalStudents;
-            }else{
-                this.malePercent = 0f;          //if one of the oprands 0, keep 0
-            }
+            calculatePercent();
             saveStudents();
         }else{//max number of students reached
             System.out.println("Maximum number of students reached");
         }
+    }
+    
+    private void calculatePercent(){
+        if (this.femaleCounter > 0 && this.maleCounter > 0) {
+                //avoid div0, cast to float, calulate the gender%
+                this.malePercent = 100 * (float) this.maleCounter / this.totalStudents;
+            }else{
+                this.malePercent = 0f;          //if one of the oprands 0, keep 0
+            }  
     }
     
     private boolean addCourse(){
@@ -144,4 +151,91 @@ public class Course {
         System.out.println();
         return "";
     }
+    
+    public String searchStudent(){
+        System.out.print("Enter a student name: ");
+        String query = Scan.nextLine();
+        
+        return searchStudent(query);
+    }
+    
+    public String searchStudent(String query){
+        //search a student and returns with his/her name
+        for (Student student : students){
+            if (student.getName().contains(query)) {
+                System.out.println("------------------------------");
+                System.out.println("Student found: " + student.getName());
+                System.out.println("------------------------------");
+                return student.getName();
+            }
+        }
+        System.out.println("-----------------");
+        System.out.println("Student not found");
+        System.out.println("-----------------");
+        return "";
+    }
+    
+    public void listStudentForDelete() throws IOException{
+        if (students.isEmpty()) {
+            System.out.println("");
+            System.out.println("Student File is empty, "
+                             + "add students to the course first");
+            System.out.println("Falling back to main menu");
+            System.out.println("");
+            return;
+        }
+       int i = 0;
+       System.out.println("(\"x\") to quit");
+       for (Student student : students){
+            System.out.println("Id: "+ i + "\t"+student.getName());
+            i++;
+        }
+       
+       while(true){            
+            System.out.print("Enter an id to delete a student:  ");
+            String userChoice = Scan.nextLine();
+            if (userChoice.equals("x")) {
+               System.out.println("--------------------------");
+               System.out.println("Returning to The Main Menu");
+               System.out.println("--------------------------");
+               break;
+           }
+
+             try{
+                 int userInt = Integer.parseInt(userChoice);
+                 deleteStudentAtIndex(userInt);
+                 return;
+             }
+             catch(NumberFormatException e){
+                 System.out.println("Input Must Be String");
+             }  
+       } 
+    }
+    
+    public boolean deleteStudentAtIndex(int index) throws IOException{
+        //dele
+         if (this.students.isEmpty()) {
+            System.out.println("");
+            System.out.println("Student File is empty, "
+                             + "add students to the course first");
+            System.out.println("Falling back to main menu");
+            System.out.println("");
+            return false;
+        }
+         Student student = this.students.get(index);
+   
+         System.out.println("Student removed from the course: " + student.getName());
+         students.remove(index);
+         this.totalStudents--;
+         
+         if ("male".equals(student.getGender())) {
+            this.maleCounter--;
+        }else{
+             this.femaleCounter--;
+         }
+         calculatePercent();
+         saveStudents();
+         return true;
+    }
+    
 }

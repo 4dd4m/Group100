@@ -41,7 +41,7 @@ public class FileHandler {
     }
     
     //saves the file this.fileName by iterating the given ArrayList
-    public void saveStudents(ArrayList fileData) throws IOException{
+    public int saveStudents(ArrayList fileData) throws IOException{
         //deleting the existing contents and create a new file since
         //all data come through the argument
         this.f.delete();
@@ -55,6 +55,7 @@ public class FileHandler {
             writer.write(line.toString());
         });
         writer.close();
+        return 0;
     }
     
     //loads a file
@@ -69,13 +70,17 @@ public class FileHandler {
                 if (line.length() > 0) {
                     String studentData[] = line.split(","); //explode it!
                  //make new students
-                 studentList.add(new Student(studentData[0], studentData[1], studentData[2], studentData[3]));
+                 studentList.add(new Student(studentData[0], 
+                                             studentData[1], 
+                                             studentData[2], 
+                                             studentData[3]));
                 }
             }
         in.close();
         return studentList;
     }
-    //loads a course
+    
+    //loads a course from file
     public Course loadCourseFromFile() throws FileNotFoundException, IOException{
             Course course; //initialize just for safety
             BufferedReader in = new BufferedReader(new FileReader("CourseDetails.txt"));
@@ -86,7 +91,7 @@ public class FileHandler {
                 course = new Course(details[0],details[1]);
             
             }
-            else{
+            else{ //create a new file and adds a new course
                 f.delete();
                 createFile();
                 System.out.println("No courses exists..");
@@ -94,24 +99,23 @@ public class FileHandler {
                 saveCourse(course);
             }
             }catch(java.lang.NullPointerException e){
+                //create a new file and adds a new course
                 f.delete();
                 createFile();
                 System.out.println("No courses exists..");
                 course = new Course();
                 saveCourse(course);
             }
-           
-   
-            
-            
             in.close();
         return course;
     }
    
-    public void saveCourse(Course courseDetails) throws FileNotFoundException, IOException{
+    public void saveCourse(Course courseDetails) 
+                throws FileNotFoundException, IOException{
         //saves a course name, lecturer
             PrintWriter writer = new PrintWriter(new FileWriter("CourseDetails.txt"));
-            String tmpString = courseDetails.getName() + "," + courseDetails.getLecturer()+"\n";
+            String tmpString = courseDetails.getName() + "," +
+                               courseDetails.getLecturer()+"\n";
             writer.write(tmpString);
             writer.close();
     }
