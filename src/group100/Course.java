@@ -152,27 +152,26 @@ public class Course {
         return "";
     }
     
-    public String searchStudent(){
+    public void searchStudent(){
+        //search a student
         System.out.print("Enter a student name: ");
         String query = Scan.nextLine();
-        
-        return searchStudent(query);
+        searchStudent(query);
     }
     
-    public String searchStudent(String query){
+    public void searchStudent(String query){
+        //overload
         //search a student and returns with his/her name
         for (Student student : students){
             if (student.getName().contains(query)) {
                 System.out.println("------------------------------");
                 System.out.println("Student found: " + student.getName());
                 System.out.println("------------------------------");
-                return student.getName();
             }
         }
         System.out.println("-----------------");
         System.out.println("Student not found");
         System.out.println("-----------------");
-        return "";
     }
     
     public void listStudentForDelete() throws IOException{
