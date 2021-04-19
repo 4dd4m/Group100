@@ -9,6 +9,7 @@ public class Course {
     private int maleCounter = 0;
     private int femaleCounter = 0;
     private float malePercent = 0f;
+    private float femalePercent = 0f;
     final int MAXSTUDENTS = 20;
     protected boolean valid;
     private ArrayList<Student> students = new ArrayList<>();
@@ -71,7 +72,7 @@ public class Course {
     public boolean isMaxStudentEnrolled(){
         //this is a pre-check to avoid on those cases where the course is full
         //and we want to avoid straight enetring into interaction mode
-        if (MAXSTUDENTS >= 20) {
+        if (students.size() >= 20) {
             System.out.println("-------------------------------");
             System.out.println("This course is full ("+ MAXSTUDENTS+" students)");
             System.out.println("-------------------------------");
@@ -104,12 +105,14 @@ public class Course {
         if (this.femaleCounter > 0 && this.maleCounter > 0) {
                 //avoid div0, cast to float, calulate the gender%
                 this.malePercent = 100 * (float) this.maleCounter / this.totalStudents;
+                this.femalePercent = 100 - this.malePercent;
         }else if(this.maleCounter > 0 && this.femaleCounter == 0){
             //course is pure males
             this.malePercent = 100f;
         }else if(this.femaleCounter > 0 && this.maleCounter == 0){
             //course is pure males
             this.malePercent = 0f;
+            this.femalePercent = 100f;
         }else{
             //pure females or division 0
                 this.malePercent = 0f;          //if one of the oprands 0, keep 0
@@ -176,8 +179,9 @@ public class Course {
                 + "Lecturer:\t\t"+this.lecturer+"\n"
                 + "Number of Students:\t"+this.totalStudents+"\n"
                 + "Males:\t\t\t" + this.maleCounter +"\n"
+                + "Females:\t\t" + this.femaleCounter +"\n"
                 + "Male%:\t\t\t" + Math.round(this.malePercent) +"%\n"
-                + "Females:\t\t" + this.femaleCounter +"\n");
+                + "Female%:\t\t" + Math.round(this.femalePercent) +"%\n");
         System.out.println();
         return "";
     }
@@ -240,7 +244,7 @@ public class Course {
             String userChoice = Scan.nextLine();
             if (userChoice.equals("x")) { //quit
                System.out.println("--------------------------");
-               System.out.println("Returning to The Main Menu");
+               System.out.println("Falling back to The Main Menu");
                System.out.println("--------------------------");
                break;
            }
@@ -250,6 +254,9 @@ public class Course {
                  deleteStudentAtIndex(userInt);
                  return;
              }
+             catch(IndexOutOfBoundsException e){
+                 System.out.println("Wrong Id");
+             }
              catch(NumberFormatException e){
                  //fall back to the cycle, ask the input again
                  System.out.println("Input Must Be String");
@@ -257,7 +264,7 @@ public class Course {
        }
     }
 
-    public boolean deleteStudentAtIndex(int index) throws IOException{
+    public boolean deleteStudentAtIndex(int index) throws IOException, IndexOutOfBoundsException{
         //actually delete the student from the course by the given index
         // listStudentForDelete() check the student existance therefore, no needed
 
