@@ -28,17 +28,17 @@ public class Uni {
     public void displayMenu() throws IOException{//Displays a menu
         System.out.println("Application Started");
         String menu = "1. Enrolled Students\n"
-                    + "2. List Courses Details\n"
-                    + "3. Add Student\n"
-                    + "4. Add Course\n"
-                    + "5. Search Student\n"
-                    + "6. Delete a Student\n"
-                    + "7.Exit\n"
-                    + "----------------------";
-        
-    while(true){ //inf loop
-        System.out.println(menu);//display menu
-        String choice = Scan.nextLine(); //ask user choice
+            + "2. List Courses Details\n"
+            + "3. Add Student\n"
+            // + "4. Add Course\n"
+            + "4. Search Student\n"
+            + "5. Delete a Student\n"
+            + "6.Exit\n"
+            + "----------------------";
+
+        while(true){ //inf loop
+            System.out.println(menu);//display menu
+            String choice = Scan.nextLine(); //ask user choice
             switch(choice){ //switch it
                 case "1":                                       // list student
                     course.displayEnrolledStudents();
@@ -47,24 +47,27 @@ public class Uni {
                     course.prettifyCourse();
                     break;
                 case "3":                                // create a new student
-                    Student tmpStudent = new Student();
-                    if (tmpStudent.valid == true) {
-                        course.enrollStudent(tmpStudent);
-                    }         
+                    if (course.isMaxStudentEnrolled() == false){
+                        //only enter interactive mode if student can enroll
+                        Student tmpStudent = new Student();
+                        if (tmpStudent.valid == true) {
+                            course.interactiveEnrollStudent(tmpStudent);
+                        }
+                    }
                     break;
-                case "4":                                 // create a new course
-                     course = new Course();
-                    if (course.valid == true) {
-                        courseHandler.saveCourse(course);
-                    }         
-                    break;
-                case "5":                                     //search a student
+                    // case "10":                              // create a new course
+                    //      course = new Course();
+                    //     if (course.valid == true) {
+                    //         courseHandler.saveCourse(course);
+                    //     }
+                    //     break;
+                case "4":                                     //search a student
                     course.searchStudent();
                     break;
-                case "6":                                    //Delete a student
+                case "5":                                    //Delete a student
                     course.listStudentForDelete();
                     break;
-                case "7":
+                case "6":
                     System.out.println("Bye bye");
                     System.exit(0);
                 default:

@@ -39,17 +39,17 @@ public class FileHandler {
             this.exists = true;
         }
     }
-    
+
     //saves the file this.fileName by iterating the given ArrayList
     public int saveStudents(ArrayList fileData) throws IOException{
         //deleting the existing contents and create a new file since
         //all data come through the argument
         this.f.delete();
         this.f.createNewFile();
-        
+
         //setting up the writer
         PrintWriter writer = new PrintWriter(new FileWriter("StudentDetails.txt"));
-        
+
         //iterating the ArrayList and write them to a file
         fileData.forEach((line) -> {
             writer.write(line.toString());
@@ -57,29 +57,29 @@ public class FileHandler {
         writer.close();
         return 0;
     }
-    
+
     //loads a file
     public ArrayList<Student> loadStudentsFromFile() throws FileNotFoundException, IOException{
         BufferedReader in = new BufferedReader(new FileReader("StudentDetails.txt"));
         //Local List for students
         ArrayList<Student> studentList = new ArrayList<>();
-        
+
             //iterating through the line
             for (String line = in.readLine(); line != null; line = in.readLine()) {
-     
+
                 if (line.length() > 0) {
                     String studentData[] = line.split(","); //explode it!
                  //make new students
-                 studentList.add(new Student(studentData[0], 
-                                             studentData[1], 
-                                             studentData[2], 
+                 studentList.add(new Student(studentData[0],
+                                             studentData[1],
+                                             studentData[2],
                                              studentData[3]));
                 }
             }
         in.close();
         return studentList;
     }
-    
+
     //loads a course from file
     public Course loadCourseFromFile() throws FileNotFoundException, IOException{
             Course course; //initialize just for safety
@@ -89,7 +89,7 @@ public class FileHandler {
                  if(line.length() > 0){
                 String[] details = line.split(",");
                 course = new Course(details[0],details[1]);
-            
+
             }
             else{ //create a new file and adds a new course
                 f.delete();
@@ -109,8 +109,8 @@ public class FileHandler {
             in.close();
         return course;
     }
-   
-    public void saveCourse(Course courseDetails) 
+
+    public void saveCourse(Course courseDetails)
                 throws FileNotFoundException, IOException{
         //saves a course name, lecturer
             PrintWriter writer = new PrintWriter(new FileWriter("CourseDetails.txt"));
