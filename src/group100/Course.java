@@ -2,7 +2,7 @@ package group100;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.*;
-
+//describe a course, containing students in a list
 public class Course {
     private String name,lecturer;
     private int totalStudents = 0;
@@ -175,15 +175,16 @@ public class Course {
     public String prettifyCourse(){
         //displays a pretty version of course details
         System.out.println();
-        System.out.print("Course Name:\t\t" +this.name+"\n"
+        String output = "Course Name:\t\t" +this.name+"\n"
                 + "Lecturer:\t\t"+this.lecturer+"\n"
                 + "Number of Students:\t"+this.totalStudents+"\n"
                 + "Males:\t\t\t" + this.maleCounter +"\n"
                 + "Females:\t\t" + this.femaleCounter +"\n"
                 + "Male%:\t\t\t" + Math.round(this.malePercent) +"%\n"
-                + "Female%:\t\t" + Math.round(this.femalePercent) +"%\n");
+                + "Female%:\t\t" + Math.round(this.femalePercent) +"%\n";
+        System.out.print(output);
         System.out.println();
-        return "";
+        return output;
     }
 
     public void searchStudent(){
@@ -254,10 +255,10 @@ public class Course {
                  deleteStudentAtIndex(userInt);
                  return;
              }
-             catch(IndexOutOfBoundsException e){
+             catch(IndexOutOfBoundsException e){ //input > student.size()-1
                  System.out.println("Wrong Id");
              }
-             catch(NumberFormatException e){
+             catch(NumberFormatException e){ //if its cannot be casted to int
                  //fall back to the cycle, ask the input again
                  System.out.println("Input Must Be String");
              }
@@ -267,7 +268,6 @@ public class Course {
     public boolean deleteStudentAtIndex(int index) throws IOException, IndexOutOfBoundsException{
         //actually delete the student from the course by the given index
         // listStudentForDelete() check the student existance therefore, no needed
-
         //access the student for his/her name
          Student student = this.students.get(index);
 
@@ -289,6 +289,10 @@ public class Course {
         //save
         saveStudents();
         return true;
+    }
+    
+    public int getNumOfStudents(){
+        return students.size();
     }
 
 }

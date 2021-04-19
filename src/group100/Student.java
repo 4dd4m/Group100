@@ -2,9 +2,9 @@ package group100;
 
 /**
  *
- * @author matro
+ * @author group100
+ * Describe a single student and its features
  */
-
 import java.util.*;
 
 public class Student {
@@ -107,16 +107,12 @@ public class Student {
     }
 
     public String prettifyStudent(){ //displays a pretty versin of students
-        System.out.print("Name:\t\t" +this.name
+        String output = "Name:\t\t" +this.name
                        +"\nGender:\t\t"+this.gender
                        +"\nAddress:\t"+this.address
-                       +"\nDate:\t\t"+this.dob+"\n" );
-        return "";
-    }
-
-    public int searchStudent(String partOfName){
-        //if there is a match, returns an index
-        return this.name.indexOf(partOfName);
+                       +"\nDate:\t\t"+this.dob+"\n";
+        System.out.print(output);
+        return output;
     }
 
     public static int getNumOfStudent(){
