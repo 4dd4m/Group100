@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+//Mr. Adam Torok - B00798824 Mr. Mateusz Tynkiewicz - B00798825
 package group100;
 
 import java.io.IOException;
@@ -14,10 +10,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author Adam
- */
 public class CourseTest {
     
     public CourseTest() {

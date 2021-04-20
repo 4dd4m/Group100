@@ -1,4 +1,4 @@
-# javaAss2
+# Assingment 2
 Java Assingment for Uni
 
 ### UML Diagram
@@ -18,4 +18,4 @@ Java Assingment for Uni
 
 # ToDo
 * Test Classes 
-* List Student details at search
+

@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.*;
 //describe a course, containing students in a list
+//Mr. Adam Torok - B00798824 Mr. Mateusz Tynkiewicz - B00798825
 public class Course {
     private String name,lecturer;
     private int totalStudents = 0;
@@ -16,7 +17,6 @@ public class Course {
     private FileHandler studentHandler;
     final String studentFileName = "StudentDetails.txt";
     Scanner Scan = new Scanner(System.in);
-
     //Standrad constructor. So we can do this:
     //new Course('Drink Chiller','Lecturer Bill')
     public Course(String name, String lecturer) throws IOException{
@@ -206,7 +206,7 @@ public class Course {
                 System.out.println("-------------");
                 System.out.println("Student found");
                 System.out.println("-------------");
-                student.prettifyStudent();
+                System.out.println(student.prettifyStudent());
                 System.out.println("-----------------");
                 isFound = true;
                 break;
@@ -290,9 +290,7 @@ public class Course {
         saveStudents();
         return true;
     }
-    
     public int getNumOfStudents(){
         return students.size();
     }
-
 }

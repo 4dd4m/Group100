@@ -7,12 +7,12 @@ import java.util.Iterator;
 /**
  * @author group100
  * Handles the file reading and writing
- * Checks file existance
- * Create New files if needed
+ * Checks file existance, Create New files if needed
  * Load a course call loadCourseFromFile returns Course
  * Load students call loadStudentsFromFile returns ArrayList<Student>
  * Save a course call saveCourse(Course);
  * Save students call loadStudentsFromFile(ArrayList<Student>)
+ * //Mr. Adam Torok - B00798824 Mr. Mateusz Tynkiewicz - B00798825
  */
 
 public class FileHandler {

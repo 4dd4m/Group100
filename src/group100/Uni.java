@@ -8,13 +8,13 @@ import java.util.logging.Logger;
  * @author group100
  * This is the main class of the application, instantiate itself
  * call the filehandler, if file exists, load them, if not, create them
+ * //Mr. Adam Torok - B00798824 Mr. Mateusz Tynkiewicz - B00798825
  * displays the menu */
 public class Uni {
     private String courseFileName = "CourseDetails.txt";
     private FileHandler courseHandler;
     private Course course;
     Scanner Scan;
-
     Uni() throws IOException{
         this.Scan = new Scanner(System.in);
         try {

@@ -6,10 +6,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author Group 100
- */
+//Mr. Adam Torok - B00798824 Mr. Mateusz Tynkiewicz - B00798825
 public class StudentTest {
     
     public StudentTest() {

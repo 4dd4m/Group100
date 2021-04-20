@@ -2,7 +2,7 @@ package group100;
 
 /**
  *
- * @author group100
+ * //Mr. Adam Torok - B00798824 Mr. Mateusz Tynkiewicz - B00798825
  * Describe a single student and its features
  */
 import java.util.*;
@@ -111,7 +111,6 @@ public class Student {
                        +"\nGender:\t\t"+this.gender
                        +"\nAddress:\t"+this.address
                        +"\nDate:\t\t"+this.dob+"\n";
-        System.out.print(output);
         return output;
     }
 

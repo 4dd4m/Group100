@@ -6,10 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import org.junit.Test;
 import static org.junit.Assert.*;
-/**
- *
- * @author Adam
- */
+//Mr. Adam Torok - B00798824 Mr. Mateusz Tynkiewicz - B00798825
 public class TestCreateStudentDetails {
     
     private FileHandler studentHandler;
