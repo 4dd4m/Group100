@@ -21,7 +21,7 @@ public class Uni {
             FileHandler handler = new FileHandler(fileName);
             //try to load the file, if fails, handler will create a new file
             //and returns an empty ArrayList
-            loadFile();  
+            loadFile();
         } catch (IOException ex) {
             Logger.getLogger(Uni.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -40,12 +40,12 @@ public class Uni {
     //if choice == n
     //call method n
     }
-    
+
     private void renameStudent(int index, String oldName, String newName){
         //index = searchStudent(oldname)
         //student[index].rename(newName)
     }
-    
+
     private Student searchStudent(String studentName){
     //iterating the student ArrayList and return the index of a match
     return new Student("after","a","search");
